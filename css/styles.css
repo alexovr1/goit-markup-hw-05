@@ -45,10 +45,6 @@ ul {
   padding: 0;
 }
 
-.header-nav .active {
-  color: var(--accent-text-color);
-}
-
 .visually-hidden {
   position: absolute;
   white-space: nowrap;
@@ -123,10 +119,28 @@ ul {
 }
 
 .header-nav-link {
+  position: relative;
   padding-top: 32px;
   padding-bottom: 31px;
   display: block;
   color: var(--main-text-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-nav-link.active {
+  color: var(--accent-text-color);
+}
+
+.header-nav-link.active::after {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  content: '';
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-text-color);
 }
 
 .header-cl {
@@ -137,6 +151,8 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--second-text-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-cl-item:not(:last-child) {
@@ -151,10 +167,6 @@ ul {
 .phone-icon {
   fill: currentColor;
   margin-right: 10px;
-}
-
-.header-cl-link {
-  color: var(--second-text-color);
 }
 
 .header-nav-link:hover,
@@ -213,6 +225,7 @@ ul {
   margin-right: auto;
   height: 50px;
   min-width: 200px;
+  transition: background-color 300ms;
 }
 
 .hero-btn:hover,
@@ -540,4 +553,51 @@ ul {
 
 .footer-soc-img {
   fill: currentColor;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 300ms, visibility 300ms;
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translateY(100%) scale(0.1);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(0) scale(1);
+  width: 528px;
+  min-height: 581px;
+  background-color: var(--main-backgroud-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform 5000ms;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background-color: var(--main-backgroud-color);
 }
